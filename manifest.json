@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Abitti arvosanalaskuri",
+  "version": "1.0",
+  "description": "Laskee maksimipisteet ja arvosanan läpipääsyrajan mukaan automaattisesti Abitissa.",
+
+  "permissions": [],
+
+  "host_permissions": [
+    "https://oma.abitti.fi/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://oma.abitti.fi/*"
+      ],
+      "js": ["Laskin.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
