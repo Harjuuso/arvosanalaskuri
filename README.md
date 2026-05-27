@@ -4,7 +4,7 @@ Laskee automaattisesti kokeen maksimipisteet ja arvosanan läpipääsyrajan muka
 
 ## Asennusohjeet
 1. Lataa tai kloonaa tämä repositorio koneellesi:```git clone https://github.com/Harjuuso/arvosanalaskuri.git```
-2. Avaa selain ja mene: `chrome://extensions` _tai vastaava_
+2. Avaa selain ja mene: `chrome://extensions` _tai käyttämäsi selaimen vastaava_
 3. Ota käyttöön Kehittäjätila oikeasta yläkulmasta
 4. Paina “Lataa pakkaamaton”
 5. Valitse kansio
