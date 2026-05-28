@@ -65,7 +65,7 @@
         }
 
         label {
-            font-size: 12px;
+            font-size: 13px;
             color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
@@ -111,7 +111,7 @@
 
         #alateksti {
             margin-top: 6px;
-            font-size: 11px;
+            font-size: 14px;
             color: rgba(0,0,0,0.55);
         }
     `;
