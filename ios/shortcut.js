@@ -10,8 +10,7 @@
             right: 0;
             bottom: 0;
             width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
+            max-width: 100%;
 
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
             color: #f3f4f6;
@@ -32,6 +31,8 @@
 
             transform: translateY(calc(100% - 52px));
             transition: transform 0.25s ease;
+            bottom: env(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         #arvosanalaskuri.avaa {
@@ -39,7 +40,7 @@
         }
 
         #ylapalkki {
-            height: 52px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -72,12 +73,12 @@
 
         input {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.08);
             background: rgba(255,255,255,0.05);
             color: white;
-            font-size: 13px;
+            font-size: 16px;
             outline: none;
         }
 
