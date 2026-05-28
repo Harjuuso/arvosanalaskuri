@@ -8,8 +8,7 @@
             position: fixed;
             left: 0;
             right: 0;
-
-            bottom: calc(env(safe-area-inset-bottom) + 12px);
+            bottom: env(safe-area-inset-bottom);
 
             width: 100%;
             max-width: 100%;
@@ -24,8 +23,7 @@
             transform: translateY(calc(100% - 90px));
             transition: transform 0.35s cubic-bezier(.2,.9,.2,1);
 
-            border-top: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 -12px 40px rgba(0,0,0,0.18);
+            box-shadow: 0 -10px 35px rgba(0,0,0,0.15);
 
             padding-bottom: env(safe-area-inset-bottom);
         }
@@ -46,14 +44,14 @@
         }
 
         #kahva {
-            width: 44px;
+            width: 42px;
             height: 5px;
             border-radius: 999px;
-            background: rgba(0,0,0,0.25);
+            background: rgba(0,0,0,0.2);
         }
 
         #otsikko {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #111827;
         }
@@ -67,9 +65,10 @@
         }
 
         label {
-            font-size: 14px;
+            font-size: 18px;
             color: rgba(0,0,0,0.55);
             display: block;
+            margin-top: 3px;
             margin-bottom: 6px;
         }
 
@@ -102,6 +101,7 @@
             border: 1px solid rgba(0,0,0,0.08);
 
             text-align: center;
+
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
 
