@@ -17,14 +17,7 @@
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
             z-index: 2147483647;
 
-            background: linear-gradient(
-                to top,
-                #f4f4f4 0%,
-                #f4f4f4 60%,
-                rgba(244, 244, 244, 0.85) 75%,
-                rgba(244, 244, 244, 0.55) 90%,
-                rgba(244, 244, 244, 0.20) 100%
-            );
+            background: #f4f4f4;
             border-radius: 18px 18px 0 0;
 
             transform: translateY(calc(100% - 90px));
@@ -61,7 +54,6 @@
             font-size: 20px;
             font-weight: 600;
             color: #111827;
-            background: transparent;
         }
 
         #sisalto {
