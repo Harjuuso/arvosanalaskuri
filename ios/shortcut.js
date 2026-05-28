@@ -22,15 +22,15 @@
             width: 94%;
             max-width: 540px;
 
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(40px) brightness(1.15);
+            -webkit-backdrop-filter: blur(40px) brightness(1.15);
 
             border-radius: 999px;
 
-            box-shadow: none;
+            box-shadow: 0 0 1px rgba(255,255,255,0.8) inset;
 
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.6);
 
             overflow: hidden;
 
