@@ -51,8 +51,8 @@
         }
 
         #otsikko {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 800;
             color: #111827;
         }
 
@@ -65,7 +65,7 @@
         }
 
         label {
-            font-size: 13px;
+            font-size: 18px;
             color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
