@@ -18,19 +18,17 @@
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
         }
 
-        /* SHEET */
         #pill {
-            width: 94%;              /* slightly wider */
-            max-width: 540px;        /* slightly wider max */
+            width: 94%;
+            max-width: 540px;
 
-            background: rgba(244,244,244,0.94);
+            background: #fdfdfd;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
             border-radius: 999px;
 
-            /* CLEANER SHADOW (removed “weird bottom glow”) */
-            box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+            box-shadow: none;
 
             border: 1px solid rgba(0,0,0,0.08);
 
@@ -40,18 +38,17 @@
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
 
-            max-height: 64px;        /* slightly taller closed state */
+            max-height: 72px;
         }
 
         #pill.open {
             max-height: 640px;
-            border-radius: 18px 18px 0 0;
+            border-radius: 24px 24px 0 0;
         }
 
-        /* HEADER */
         #header {
             position: relative;
-            height: 64px;           /* slightly taller */
+            height: 72px;
 
             display: flex;
             flex-direction: column;
@@ -79,7 +76,6 @@
             margin-top: 10px;
         }
 
-        /* BODY */
         #body {
             padding: 16px;
 
@@ -284,5 +280,3 @@
     }, 300);
 
 })();
-
-completion();
