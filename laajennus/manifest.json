@@ -15,7 +15,7 @@
       "matches": [
         "https://oma.abitti.fi/*"
       ],
-      "js": ["Laskin.js"],
+      "js": ["laskin.js"],
       "run_at": "document_idle"
     }
   ]
