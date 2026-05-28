@@ -22,15 +22,18 @@
             width: 94%;
             max-width: 540px;
 
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(40px) brightness(1.15);
-            -webkit-backdrop-filter: blur(40px) brightness(1.15);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(50px) brightness(1.25) saturate(1.2) contrast(1.1);
+            -webkit-backdrop-filter: blur(50px) brightness(1.25) saturate(1.2) contrast(1.1);
 
             border-radius: 999px;
 
-            box-shadow: 0 0 1px rgba(255,255,255,0.8) inset;
+            box-shadow: 
+                0 0 2px rgba(255,255,255,1) inset,
+                0 0 20px rgba(255,255,255,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.5);
 
-            border: 1px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.8);
 
             overflow: hidden;
 
