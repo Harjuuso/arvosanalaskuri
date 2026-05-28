@@ -20,7 +20,7 @@
             background: #f4f4f4;
             border-radius: 18px 18px 0 0;
 
-            transform: translateY(calc(100% - 64px));
+            transform: translateY(calc(100% - 90px));
             transition: transform 0.35s cubic-bezier(.2,.9,.2,1);
 
             box-shadow: 0 -10px 35px rgba(0,0,0,0.15);
@@ -57,7 +57,7 @@
         }
 
         #sisalto {
-            padding: 14px;
+            padding: 18px;
         }
 
         .rivi {
@@ -65,7 +65,7 @@
         }
 
         label {
-            font-size: 11px;
+            font-size: 12px;
             color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
@@ -73,13 +73,13 @@
 
         input {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             border-radius: 12px;
 
             border: 1px solid rgba(0,0,0,0.12);
             background: #ffffff;
 
-            font-size: 16px;
+            font-size: 18px;
             outline: none;
             color: #111827;
 
@@ -105,7 +105,7 @@
         }
 
         #arvosana {
-            font-size: 38px;
+            font-size: 44px;
             font-weight: 800;
         }
 
