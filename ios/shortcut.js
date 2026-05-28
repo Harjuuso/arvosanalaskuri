@@ -33,7 +33,7 @@
         }
 
         #ylapalkki {
-            height: 64px;
+            height: 70px;
             display: flex;
             flex-direction: column;
             justify-content: center;
