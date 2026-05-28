@@ -21,23 +21,27 @@
         #pill {
             width: 94%;
             max-width: 540px;
-
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-
+        
+            /* Apple Maps / iOS glass */
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        
             border-radius: 999px;
-
-            box-shadow: none;
-
-            border: 1px solid rgba(255,255,255,0.5);
-
+        
+            /* pehmeä mutta “premium” shadow */
+            box-shadow:
+                0 18px 50px rgba(0,0,0,0.18),
+                0 2px 8px rgba(0,0,0,0.08);
+        
+            border: 1px solid rgba(255,255,255,0.55);
+        
             overflow: hidden;
-
+        
             transition:
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
-
+        
             max-height: 88px;
         }
 
@@ -91,23 +95,35 @@
         }
 
         label {
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
             color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
         }
-
+        
         input {
             width: 100%;
             padding: 16px;
-
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.12);
-
-            background: #fff;
+        
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.10);
+        
+            background: rgba(255,255,255,0.9);
+        
             font-size: 18px;
             color: #111827;
+        
             outline: none;
+        
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.7),
+                inset 0 1px 2px rgba(0,0,0,0.04);
+        }
+        
+        input:focus {
+            border-color: rgba(0,122,255,0.35);
+            box-shadow: 0 0 0 4px rgba(0,122,255,0.12);
         }
 
         #tulos {
