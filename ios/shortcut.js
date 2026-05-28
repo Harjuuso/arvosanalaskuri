@@ -21,27 +21,24 @@
         #pill {
             width: 94%;
             max-width: 540px;
-        
-            /* Apple Maps / iOS glass */
+
             background: rgba(255, 255, 255, 0.72);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
-        
+
             border-radius: 999px;
-        
-            /* pehmeä mutta “premium” shadow */
-            box-shadow:
-                0 18px 50px rgba(0,0,0,0.18),
-                0 2px 8px rgba(0,0,0,0.08);
-        
+
+            /* ❌ shadow removed completely */
+            box-shadow: none;
+
             border: 1px solid rgba(255,255,255,0.55);
-        
+
             overflow: hidden;
-        
+
             transition:
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
-        
+
             max-height: 88px;
         }
 
@@ -71,7 +68,6 @@
             font-size: 17px;
             font-weight: 600;
             color: #111827;
-            margin-top: 0;
         }
 
         #body {
@@ -101,26 +97,24 @@
             display: block;
             margin-bottom: 6px;
         }
-        
+
         input {
             width: 100%;
             padding: 16px;
-        
+
             border-radius: 14px;
             border: 1px solid rgba(0,0,0,0.10);
-        
+
             background: rgba(255,255,255,0.9);
-        
+
             font-size: 18px;
             color: #111827;
-        
+
             outline: none;
-        
-            box-shadow:
-                0 1px 0 rgba(255,255,255,0.7),
-                inset 0 1px 2px rgba(0,0,0,0.04);
+
+            box-shadow: none; /* ❌ removed inner shadow too for flat look */
         }
-        
+
         input:focus {
             border-color: rgba(0,122,255,0.35);
             box-shadow: 0 0 0 4px rgba(0,122,255,0.12);
@@ -131,10 +125,12 @@
             padding: 18px;
             border-radius: 16px;
 
-            background: #fff;
+            background: rgba(255,255,255,0.9);
             border: 1px solid rgba(0,0,0,0.08);
 
             text-align: center;
+
+            box-shadow: none; /* ❌ removed widget shadow */
         }
 
         #arvosana {
@@ -162,7 +158,6 @@
         <div id="pill">
 
             <div id="header">
-                <div id="handle"></div>
                 <div id="title">Arvosanalaskuri</div>
             </div>
 
