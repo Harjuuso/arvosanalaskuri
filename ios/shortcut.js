@@ -52,7 +52,7 @@
 
         #otsikko {
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 600;
             color: #111827;
         }
 
