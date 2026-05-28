@@ -8,56 +8,91 @@
             position: fixed;
             left: 0;
             right: 0;
-            bottom: env(safe-area-inset-bottom);
+            bottom: calc(env(safe-area-inset-bottom) + 10px);
 
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
+            display: flex;
+            justify-content: center;
 
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
             z-index: 2147483647;
 
-            background: #f4f4f4;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+        }
+
+        #pill {
+            width: 92%;
+            max-width: 520px;
+
+            background: rgba(244,244,244,0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-radius: 999px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            border: 1px solid rgba(0,0,0,0.08);
+
+            overflow: hidden;
+
+            transition:
+                max-height 0.35s cubic-bezier(.2,.9,.2,1),
+                border-radius 0.35s cubic-bezier(.2,.9,.2,1);
+
+            max-height: 56px;
+        }
+
+        #pill.open {
+            max-height: 600px;
             border-radius: 18px 18px 0 0;
-
-            transform: translateY(calc(100% - 90px));
-            transition: transform 0.35s cubic-bezier(.2,.9,.2,1);
-
-            box-shadow: 0 -10px 35px rgba(0,0,0,0.15);
-
-            padding-bottom: env(safe-area-inset-bottom);
         }
 
-        #arvosanalaskuri.avaa {
-            transform: translateY(0);
-        }
+        #header {
+            position: relative;
+            height: 56px;
 
-        #ylapalkki {
-            height: 64px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
 
+            cursor: pointer;
             user-select: none;
         }
 
-        #kahva {
-            width: 42px;
+        #header:focus {
+            outline: none;
+        }
+        
+        #handle {
+            width: 44px;
             height: 5px;
             border-radius: 999px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.22);
+
+            position: absolute;
+            top: 6px;
         }
 
-        #otsikko {
-            font-size: 20px;
+        #title {
+            font-size: 17px;
             font-weight: 600;
             color: #111827;
+            margin-top: 10px;
         }
 
-        #sisalto {
-            padding: 18px;
+        #body {
+            padding: 16px;
+
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+
+            transition: all 0.25s ease;
+        }
+
+        #pill.open #body {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
 
         .rivi {
@@ -65,31 +100,23 @@
         }
 
         label {
-            font-size: 18px;
+            font-size: 14px;
             color: rgba(0,0,0,0.55);
             display: block;
-            margin-top: 3px;
             margin-bottom: 6px;
         }
 
         input {
             width: 100%;
-            padding: 18px;
+            padding: 16px;
+
             border-radius: 12px;
-
             border: 1px solid rgba(0,0,0,0.12);
-            background: #ffffff;
 
+            background: #fff;
             font-size: 18px;
-            outline: none;
             color: #111827;
-
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-        }
-
-        input:focus {
-            border-color: rgba(0,122,255,0.6);
-            box-shadow: 0 0 0 3px rgba(0,122,255,0.15);
+            outline: none;
         }
 
         #tulos {
@@ -97,12 +124,10 @@
             padding: 18px;
             border-radius: 16px;
 
-            background: #ffffff;
+            background: #fff;
             border: 1px solid rgba(0,0,0,0.08);
 
             text-align: center;
-
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
 
         #arvosana {
@@ -115,6 +140,10 @@
             font-size: 14px;
             color: rgba(0,0,0,0.55);
         }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
     `;
 
     document.head.appendChild(style);
@@ -123,36 +152,43 @@
     app.id = "arvosanalaskuri";
 
     app.innerHTML = `
-        <div id="ylapalkki">
-            <div id="kahva"></div>
-            <div id="otsikko">Arvosanalaskuri</div>
-        </div>
+        <div id="pill">
 
-        <div id="sisalto">
-            <div class="rivi">
-                <label>Pisteet</label>
-                <input id="pisteet" type="number">
+            <div id="header">
+                <div id="handle"></div>
+                <div id="title">Arvosanalaskuri</div>
             </div>
 
-            <div class="rivi">
-                <label>Läpipääsyraja (%)</label>
-                <input id="raja" type="number" value="50" min="0" max="100">
+            <div id="body">
+                <div class="rivi">
+                    <label>Pisteet</label>
+                    <input id="pisteet" type="number">
+                </div>
+
+                <div class="rivi">
+                    <label>Läpipääsyraja (%)</label>
+                    <input id="raja" type="number" value="50" min="0" max="100">
+                </div>
+
+                <div id="tulos">
+                    <div id="arvosana">—</div>
+                    <div id="alateksti">Ei pisteitä</div>
+                </div>
             </div>
 
-            <div id="tulos">
-                <div id="arvosana">—</div>
-                <div id="alateksti">Ei pisteitä</div>
-            </div>
         </div>
     `;
 
     document.body.appendChild(app);
 
+    const pill = document.getElementById("pill");
+    const header = document.getElementById("header");
+
     let open = false;
 
-    document.getElementById("ylapalkki").onclick = () => {
+    header.onclick = () => {
         open = !open;
-        app.classList.toggle("avaa", open);
+        pill.classList.toggle("open", open);
     };
 
     function haePisteet() {
@@ -169,13 +205,13 @@
         return { saatu, maksimi };
     }
 
-    function laskeArvosana(pisteet, maksimi, raja) {
-        const rajaPisteina = maksimi * (raja / 100);
+    function laskeArvosana(p, max, r) {
+        const raja = max * (r / 100);
 
-        if (pisteet < rajaPisteina) {
-            const askel = rajaPisteina / 3;
-            if (pisteet < askel) return "4";
-            if (pisteet < askel * 2) return "4+";
+        if (p < raja) {
+            const a = raja / 3;
+            if (p < a) return "4";
+            if (p < a * 2) return "4+";
             return "4½";
         }
 
@@ -188,7 +224,7 @@
             "10−","10"
         ];
 
-        const t = (pisteet - rajaPisteina) / (maksimi - rajaPisteina);
+        const t = (p - raja) / (max - raja);
         let i = Math.floor(t * tasot.length);
 
         return tasot[Math.max(0, Math.min(i, tasot.length - 1))];
@@ -213,30 +249,31 @@
         }
 
         const g = laskeArvosana(p, maksimi, r);
+
         arvosana.textContent = g;
-        alateksti.textContent = `${p} / ${maksimi} pistettä`;
+        alateksti.textContent = `${p} / ${maksimi}`;
 
         const num = parseFloat(g);
         const clamped = Math.max(4, Math.min(10, isNaN(num) ? 4 : num));
         const t = (clamped - 4) / 6;
 
-        const lerp = (a, b, t) => a + (b - a) * t;
+        const lerp = (a,b,t)=>a+(b-a)*t;
 
-        let rCol, gCol, b;
+        let rCol,gCol,b;
 
         if (t < 0.5) {
-            const lt = t / 0.5;
+            const lt = t/0.5;
             rCol = 239;
-            gCol = lerp(68, 197, lt);
+            gCol = lerp(68,197,lt);
             b = 68;
         } else {
-            const lt = (t - 0.5) / 0.5;
-            rCol = lerp(239, 34, lt);
-            gCol = lerp(197, 197, lt);
-            b = lerp(68, 94, lt);
+            const lt = (t-0.5)/0.5;
+            rCol = lerp(239,34,lt);
+            gCol = lerp(197,197,lt);
+            b = lerp(68,94,lt);
         }
 
-        arvosana.style.color = `rgb(${rCol}, ${gCol}, ${b})`;
+        arvosana.style.color = `rgb(${rCol},${gCol},${b})`;
     }
 
     pisteInput.oninput = paivita;
