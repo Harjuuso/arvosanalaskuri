@@ -4,51 +4,29 @@
 
     const tyyli = document.createElement("style");
     tyyli.textContent = `
-        :root {
-            --bg: #000000;
-            --text: #f3f4f6;
-            --muted: rgba(255,255,255,0.6);
-            --input: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.10);
-            --card: rgba(255,255,255,0.04);
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg: #f4f4f4;
-                --text: #111827;
-                --muted: rgba(0,0,0,0.55);
-                --input: rgba(0,0,0,0.05);
-                --border: rgba(0,0,0,0.08);
-                --card: #ffffff;
-            }
-        }
-
         #arvosanalaskuri {
             position: fixed;
             left: 0;
             right: 0;
-            bottom: env(safe-area-inset-bottom);
+            bottom: 0;
 
             width: 100%;
             max-width: 100%;
             margin: 0 auto;
 
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-            color: var(--text);
+            color: #111827;
             z-index: 2147483647;
 
-            border-radius: 22px 22px 0 0;
-            overflow: hidden;
+            background: #f4f4f4;
+            border-radius: 18px 18px 0 0;
 
-            background: var(--bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            transform: translateY(calc(100% - 64px));
+            transition: transform 0.35s cubic-bezier(.2,.9,.2,1);
 
-            border-top: 1px solid var(--border);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
 
-            transform: translateY(calc(100% - 60px));
-            transition: transform 0.25s ease;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         #arvosanalaskuri.avaa {
@@ -56,20 +34,27 @@
         }
 
         #ylapalkki {
-            height: 60px;
+            height: 64px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            gap: 10px;
-
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-
-            background: var(--card);
-            border-bottom: 1px solid var(--border);
+            align-items: center;
+            gap: 6px;
 
             user-select: none;
+        }
+
+        #kahva {
+            width: 42px;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        #otsikko {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
         }
 
         #sisalto {
@@ -82,7 +67,7 @@
 
         label {
             font-size: 11px;
-            color: var(--muted);
+            color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
         }
@@ -92,17 +77,17 @@
             padding: 16px;
             border-radius: 12px;
 
-            border: 1px solid var(--border);
-            background: var(--input);
+            border: 1px solid rgba(0,0,0,0.1);
+            background: white;
 
-            color: var(--text);
             font-size: 16px;
             outline: none;
+            color: #111827;
         }
 
         input:focus {
-            border-color: rgba(99,102,241,0.6);
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+            border-color: rgba(0,122,255,0.6);
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.15);
         }
 
         #tulos {
@@ -110,8 +95,8 @@
             padding: 18px;
             border-radius: 16px;
 
-            background: var(--card);
-            border: 1px solid var(--border);
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
             text-align: center;
         }
 
@@ -123,7 +108,7 @@
         #alateksti {
             margin-top: 6px;
             font-size: 11px;
-            color: var(--muted);
+            color: rgba(0,0,0,0.55);
         }
     `;
 
@@ -134,8 +119,8 @@
 
     laatikko.innerHTML = `
         <div id="ylapalkki">
-            <span id="nuoli">▲</span>
-            Arvosanalaskuri
+            <div id="kahva"></div>
+            <div id="otsikko">Arvosanalaskuri</div>
         </div>
 
         <div id="sisalto">
@@ -158,15 +143,13 @@
 
     document.body.appendChild(laatikko);
 
-    const ylapalkki = document.getElementById("ylapalkki");
-    const nuoli = document.getElementById("nuoli");
-
     let auki = false;
+
+    const ylapalkki = document.getElementById("ylapalkki");
 
     ylapalkki.onclick = () => {
         auki = !auki;
         laatikko.classList.toggle("avaa", auki);
-        nuoli.textContent = auki ? "▼" : "▲";
     };
 
     function haePisteet() {
@@ -229,28 +212,6 @@
         const g = laskeArvosana(p, maksimi, r);
         arvosana.textContent = g;
         alateksti.textContent = `${p} / ${maksimi} pistettä`;
-
-        const n = parseFloat(g);
-        const clamped = Math.max(4, Math.min(10, isNaN(n) ? 4 : n));
-        const t = (clamped - 4) / 6;
-
-        const lerp = (a, b, t) => a + (b - a) * t;
-
-        let rCol, gCol, b;
-
-        if (t < 0.5) {
-            const lt = t / 0.5;
-            rCol = 239;
-            gCol = lerp(68, 197, lt);
-            b = 68;
-        } else {
-            const lt = (t - 0.5) / 0.5;
-            rCol = lerp(239, 34, lt);
-            gCol = lerp(197, 197, lt);
-            b = lerp(68, 94, lt);
-        }
-
-        arvosana.style.color = `rgb(${rCol}, ${gCol}, ${b})`;
     }
 
     pisteInput.oninput = paivita;
