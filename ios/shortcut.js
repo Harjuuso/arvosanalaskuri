@@ -18,9 +18,10 @@
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
         }
 
+        /* SHEET */
         #pill {
-            width: 92%;
-            max-width: 520px;
+            width: 94%;              /* slightly wider */
+            max-width: 540px;        /* slightly wider max */
 
             background: rgba(244,244,244,0.94);
             backdrop-filter: blur(18px);
@@ -28,7 +29,9 @@
 
             border-radius: 999px;
 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+            /* CLEANER SHADOW (removed “weird bottom glow”) */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+
             border: 1px solid rgba(0,0,0,0.08);
 
             overflow: hidden;
@@ -37,17 +40,18 @@
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
 
-            max-height: 56px;
+            max-height: 64px;        /* slightly taller closed state */
         }
 
         #pill.open {
-            max-height: 600px;
+            max-height: 640px;
             border-radius: 18px 18px 0 0;
         }
 
+        /* HEADER */
         #header {
             position: relative;
-            height: 56px;
+            height: 64px;           /* slightly taller */
 
             display: flex;
             flex-direction: column;
@@ -58,10 +62,6 @@
             user-select: none;
         }
 
-        #header:focus {
-            outline: none;
-        }
-        
         #handle {
             width: 44px;
             height: 5px;
@@ -69,7 +69,7 @@
             background: rgba(0,0,0,0.22);
 
             position: absolute;
-            top: 6px;
+            top: 8px;
         }
 
         #title {
@@ -79,6 +79,7 @@
             margin-top: 10px;
         }
 
+        /* BODY */
         #body {
             padding: 16px;
 
@@ -184,11 +185,8 @@
     const pill = document.getElementById("pill");
     const header = document.getElementById("header");
 
-    let open = false;
-
     header.onclick = () => {
-        open = !open;
-        pill.classList.toggle("open", open);
+        pill.classList.toggle("open");
     };
 
     function haePisteet() {
