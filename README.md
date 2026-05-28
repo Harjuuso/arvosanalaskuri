@@ -15,3 +15,5 @@ Laskee automaattisesti kokeen maksimipisteet ja arvosanan läpipääsyrajan muka
 2. Laskuri ilmestyy automaattisesti näytölle
 3. Muokkaa oma läpipääsyraja (%)
 4. Anna tarvittaessa omat pisteet
+
+https://www.icloud.com/shortcuts/b38fe6b75faa4abca10b370eb8ff0e40
