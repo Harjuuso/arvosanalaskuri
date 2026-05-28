@@ -22,7 +22,7 @@
             width: 94%;
             max-width: 540px;
 
-            background: #fdfdfd;
+            background: #fefefd;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
@@ -38,7 +38,7 @@
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
 
-            max-height: 72px;
+            max-height: 88px;
         }
 
         #pill.open {
@@ -48,7 +48,7 @@
 
         #header {
             position: relative;
-            height: 72px;
+            height: 88px;
 
             display: flex;
             flex-direction: column;
@@ -60,20 +60,14 @@
         }
 
         #handle {
-            width: 44px;
-            height: 5px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.22);
-
-            position: absolute;
-            top: 8px;
+            display: none;
         }
 
         #title {
             font-size: 17px;
             font-weight: 600;
             color: #111827;
-            margin-top: 10px;
+            margin-top: 0;
         }
 
         #body {
