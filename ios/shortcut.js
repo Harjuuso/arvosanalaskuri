@@ -2,20 +2,19 @@
 
     document.getElementById("arvosanalaskuri")?.remove();
 
-    const tyyli = document.createElement("style");
-    tyyli.textContent = `
+    const style = document.createElement("style");
+    style.textContent = `
         #arvosanalaskuri {
             position: fixed;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: env(safe-area-inset-bottom);
 
             width: 100%;
             max-width: 100%;
             margin: 0 auto;
 
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-            color: #111827;
             z-index: 2147483647;
 
             background: #f4f4f4;
@@ -24,7 +23,7 @@
             transform: translateY(calc(100% - 64px));
             transition: transform 0.35s cubic-bezier(.2,.9,.2,1);
 
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 -10px 35px rgba(0,0,0,0.15);
 
             padding-bottom: env(safe-area-inset-bottom);
         }
@@ -77,12 +76,14 @@
             padding: 16px;
             border-radius: 12px;
 
-            border: 1px solid rgba(0,0,0,0.1);
-            background: white;
+            border: 1px solid rgba(0,0,0,0.12);
+            background: #ffffff;
 
             font-size: 16px;
             outline: none;
             color: #111827;
+
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
         }
 
         input:focus {
@@ -95,13 +96,16 @@
             padding: 18px;
             border-radius: 16px;
 
-            background: white;
+            background: #ffffff;
             border: 1px solid rgba(0,0,0,0.08);
+
             text-align: center;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
 
         #arvosana {
-            font-size: 34px;
+            font-size: 38px;
             font-weight: 800;
         }
 
@@ -112,12 +116,12 @@
         }
     `;
 
-    document.head.appendChild(tyyli);
+    document.head.appendChild(style);
 
-    const laatikko = document.createElement("div");
-    laatikko.id = "arvosanalaskuri";
+    const app = document.createElement("div");
+    app.id = "arvosanalaskuri";
 
-    laatikko.innerHTML = `
+    app.innerHTML = `
         <div id="ylapalkki">
             <div id="kahva"></div>
             <div id="otsikko">Arvosanalaskuri</div>
@@ -141,15 +145,13 @@
         </div>
     `;
 
-    document.body.appendChild(laatikko);
+    document.body.appendChild(app);
 
-    let auki = false;
+    let open = false;
 
-    const ylapalkki = document.getElementById("ylapalkki");
-
-    ylapalkki.onclick = () => {
-        auki = !auki;
-        laatikko.classList.toggle("avaa", auki);
+    document.getElementById("ylapalkki").onclick = () => {
+        open = !open;
+        app.classList.toggle("avaa", open);
     };
 
     function haePisteet() {
@@ -212,6 +214,28 @@
         const g = laskeArvosana(p, maksimi, r);
         arvosana.textContent = g;
         alateksti.textContent = `${p} / ${maksimi} pistettä`;
+
+        const num = parseFloat(g);
+        const clamped = Math.max(4, Math.min(10, isNaN(num) ? 4 : num));
+        const t = (clamped - 4) / 6;
+
+        const lerp = (a, b, t) => a + (b - a) * t;
+
+        let rCol, gCol, b;
+
+        if (t < 0.5) {
+            const lt = t / 0.5;
+            rCol = 239;
+            gCol = lerp(68, 197, lt);
+            b = 68;
+        } else {
+            const lt = (t - 0.5) / 0.5;
+            rCol = lerp(239, 34, lt);
+            gCol = lerp(197, 197, lt);
+            b = lerp(68, 94, lt);
+        }
+
+        arvosana.style.color = `rgb(${rCol}, ${gCol}, ${b})`;
     }
 
     pisteInput.oninput = paivita;
