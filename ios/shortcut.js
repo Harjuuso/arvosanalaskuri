@@ -4,35 +4,51 @@
 
     const tyyli = document.createElement("style");
     tyyli.textContent = `
+        :root {
+            --bg: #000000;
+            --text: #f3f4f6;
+            --muted: rgba(255,255,255,0.6);
+            --input: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.10);
+            --card: rgba(255,255,255,0.04);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f4f4f4;
+                --text: #111827;
+                --muted: rgba(0,0,0,0.55);
+                --input: rgba(0,0,0,0.05);
+                --border: rgba(0,0,0,0.08);
+                --card: #ffffff;
+            }
+        }
+
         #arvosanalaskuri {
             position: fixed;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: env(safe-area-inset-bottom);
+
             width: 100%;
             max-width: 100%;
+            margin: 0 auto;
 
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-            color: #f3f4f6;
+            color: var(--text);
             z-index: 2147483647;
 
-            border-radius: 18px 18px 0 0;
+            border-radius: 22px 22px 0 0;
             overflow: hidden;
 
-            background:
-                radial-gradient(circle at 20% 20%, rgba(99,102,241,0.10), transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(34,197,94,0.06), transparent 55%),
-                rgba(10, 12, 18, 0.92);
-
+            background: var(--bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
 
-            border-top: 1px solid rgba(255,255,255,0.10);
+            border-top: 1px solid var(--border);
 
-            transform: translateY(calc(100% - 52px));
+            transform: translateY(calc(100% - 60px));
             transition: transform 0.25s ease;
-            bottom: env(safe-area-inset-bottom);
-            padding-bottom: env(safe-area-inset-bottom);
         }
 
         #arvosanalaskuri.avaa {
@@ -46,12 +62,12 @@
             justify-content: center;
             gap: 10px;
 
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: 0.3px;
 
-            background: rgba(255,255,255,0.04);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
 
             user-select: none;
         }
@@ -66,18 +82,20 @@
 
         label {
             font-size: 11px;
-            color: rgba(255,255,255,0.65);
-            display:block;
-            margin-bottom:6px;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 6px;
         }
 
         input {
             width: 100%;
             padding: 16px;
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.05);
-            color: white;
+
+            border: 1px solid var(--border);
+            background: var(--input);
+
+            color: var(--text);
             font-size: 16px;
             outline: none;
         }
@@ -91,8 +109,9 @@
             margin-top: 14px;
             padding: 18px;
             border-radius: 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+
+            background: var(--card);
+            border: 1px solid var(--border);
             text-align: center;
         }
 
@@ -104,7 +123,7 @@
         #alateksti {
             margin-top: 6px;
             font-size: 11px;
-            color: rgba(255,255,255,0.6);
+            color: var(--muted);
         }
     `;
 
