@@ -2,66 +2,60 @@
 
     document.getElementById("arvosanalaskuri")?.remove();
 
-    const style = document.createElement("style");
-    style.textContent = `
+    const tyyli = document.createElement("style");
+    tyyli.textContent = `
         #arvosanalaskuri {
             position: fixed;
             left: 0;
             right: 0;
             bottom: calc(env(safe-area-inset-bottom) + 10px);
-
             display: flex;
             justify-content: center;
-
             z-index: 2147483647;
-
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #pill {
-            width: 94%;
-            max-width: 540px;
-
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            width: 95%;
+            max-width: 560px;
+            background: #fdfdfd;
 
             border-radius: 999px;
-
-            /* ❌ shadow removed completely */
-            box-shadow: none;
-
-            border: 1px solid rgba(255,255,255,0.55);
-
             overflow: hidden;
+
+            border: 1px solid rgba(0,0,0,0.10);
+
+            max-height: 88px;
 
             transition:
                 max-height 0.35s cubic-bezier(.2,.9,.2,1),
                 border-radius 0.35s cubic-bezier(.2,.9,.2,1);
-
-            max-height: 88px;
         }
 
         #pill.open {
-            max-height: 640px;
-            border-radius: 24px 24px 0 0;
+            max-height: 660px;
+            border-radius: 22px 22px 0 0;
         }
 
         #header {
-            position: relative;
             height: 88px;
-
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
             cursor: pointer;
             user-select: none;
+            position: relative;
         }
 
         #handle {
-            display: none;
+            width: 44px;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.25);
+            position: absolute;
+            top: 8px;
         }
 
         #title {
@@ -70,17 +64,15 @@
             color: #111827;
         }
 
-        #body {
+        #sisalto {
             padding: 16px;
-
             opacity: 0;
             transform: translateY(10px);
             pointer-events: none;
-
             transition: all 0.25s ease;
         }
 
-        #pill.open #body {
+        #pill.open #sisalto {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
@@ -91,8 +83,7 @@
         }
 
         label {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 14px;
             color: rgba(0,0,0,0.55);
             display: block;
             margin-bottom: 6px;
@@ -101,23 +92,18 @@
         input {
             width: 100%;
             padding: 16px;
+            border-radius: 12px;
 
-            border-radius: 14px;
-            border: 1px solid rgba(0,0,0,0.10);
-
-            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.12);
+            background: #ffffff;
 
             font-size: 18px;
             color: #111827;
-
             outline: none;
-
-            box-shadow: none; /* ❌ removed inner shadow too for flat look */
         }
 
         input:focus {
-            border-color: rgba(0,122,255,0.35);
-            box-shadow: 0 0 0 4px rgba(0,122,255,0.12);
+            border-color: rgba(0,122,255,0.45);
         }
 
         #tulos {
@@ -125,12 +111,10 @@
             padding: 18px;
             border-radius: 16px;
 
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.10);
 
             text-align: center;
-
-            box-shadow: none; /* ❌ removed widget shadow */
         }
 
         #arvosana {
@@ -143,25 +127,22 @@
             font-size: 14px;
             color: rgba(0,0,0,0.55);
         }
-
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
     `;
 
-    document.head.appendChild(style);
+    document.head.appendChild(tyyli);
 
-    const app = document.createElement("div");
-    app.id = "arvosanalaskuri";
+    const sovellus = document.createElement("div");
+    sovellus.id = "arvosanalaskuri";
 
-    app.innerHTML = `
+    sovellus.innerHTML = `
         <div id="pill">
 
             <div id="header">
+                <div id="handle"></div>
                 <div id="title">Arvosanalaskuri</div>
             </div>
 
-            <div id="body">
+            <div id="sisalto">
                 <div class="rivi">
                     <label>Pisteet</label>
                     <input id="pisteet" type="number">
@@ -181,36 +162,39 @@
         </div>
     `;
 
-    document.body.appendChild(app);
+    document.body.appendChild(sovellus);
 
-    const pill = document.getElementById("pill");
-    const header = document.getElementById("header");
+    const pilli = document.getElementById("pill");
+    const pistekenttä = document.getElementById("pisteet");
+    const rajakenttä = document.getElementById("raja");
+    const arvosana = document.getElementById("arvosana");
+    const alateksti = document.getElementById("alateksti");
 
-    header.onclick = () => {
-        pill.classList.toggle("open");
+    document.getElementById("header").onclick = () => {
+        pilli.classList.toggle("open");
     };
 
     function haePisteet() {
-        let saatu = 0, maksimi = 0;
+        let saadut = 0, maksimi = 0;
 
         document.querySelectorAll(".e-result-scorecount").forEach(el => {
-            const m = el.innerText.match(/(\d+)\s*\/\s*(\d+)/);
-            if (m) {
-                saatu += +m[1];
-                maksimi += +m[2];
+            const osuma = el.innerText.match(/(\d+)\s*\/\s*(\d+)/);
+            if (osuma) {
+                saadut += +osuma[1];
+                maksimi += +osuma[2];
             }
         });
 
-        return { saatu, maksimi };
+        return { saadut, maksimi };
     }
 
-    function laskeArvosana(p, max, r) {
-        const raja = max * (r / 100);
+    function laskeArvosana(pisteet, maksimi, raja) {
+        const rajaPisteinä = maksimi * (raja / 100);
 
-        if (p < raja) {
-            const a = raja / 3;
-            if (p < a) return "4";
-            if (p < a * 2) return "4+";
+        if (pisteet < rajaPisteinä) {
+            const askel = rajaPisteinä / 3;
+            if (pisteet < askel) return "4";
+            if (pisteet < askel * 2) return "4+";
             return "4½";
         }
 
@@ -223,23 +207,18 @@
             "10−","10"
         ];
 
-        const t = (p - raja) / (max - raja);
+        const t = (pisteet - rajaPisteinä) / (maksimi - rajaPisteinä);
         let i = Math.floor(t * tasot.length);
 
         return tasot[Math.max(0, Math.min(i, tasot.length - 1))];
     }
 
-    const pisteInput = document.getElementById("pisteet");
-    const rajaInput = document.getElementById("raja");
-    const arvosana = document.getElementById("arvosana");
-    const alateksti = document.getElementById("alateksti");
-
-    function paivita() {
+    function päivitä() {
 
         const { maksimi } = haePisteet();
 
-        const p = parseFloat(pisteInput.value || 0);
-        const r = parseFloat(rajaInput.value || 50);
+        const p = parseFloat(pistekenttä.value || 0);
+        const r = parseFloat(rajakenttä.value || 50);
 
         if (!maksimi) {
             arvosana.textContent = "—";
@@ -258,30 +237,30 @@
 
         const lerp = (a,b,t)=>a+(b-a)*t;
 
-        let rCol,gCol,b;
+        let rCol, gCol, b;
 
         if (t < 0.5) {
-            const lt = t/0.5;
+            const lt = t / 0.5;
             rCol = 239;
-            gCol = lerp(68,197,lt);
+            gCol = lerp(68, 197, lt);
             b = 68;
         } else {
-            const lt = (t-0.5)/0.5;
-            rCol = lerp(239,34,lt);
-            gCol = lerp(197,197,lt);
-            b = lerp(68,94,lt);
+            const lt = (t - 0.5) / 0.5;
+            rCol = lerp(239, 34, lt);
+            gCol = lerp(197, 197, lt);
+            b = lerp(68, 94, lt);
         }
 
         arvosana.style.color = `rgb(${rCol},${gCol},${b})`;
     }
 
-    pisteInput.oninput = paivita;
-    rajaInput.oninput = paivita;
+    pistekenttä.oninput = päivitä;
+    rajakenttä.oninput = päivitä;
 
     setTimeout(() => {
-        const { saatu } = haePisteet();
-        if (!pisteInput.value) pisteInput.value = saatu;
-        paivita();
+        const { saadut } = haePisteet();
+        if (!pistekenttä.value) pistekenttä.value = saadut;
+        päivitä();
     }, 300);
 
 })();
